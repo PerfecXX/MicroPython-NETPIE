@@ -1,5 +1,6 @@
 # Import Library
 from simple import MQTTClient, MQTTException
+from network import WLAN
 import json
 
 __version__ = '0.0.1'
@@ -60,6 +61,10 @@ class NETPIE:
         except MQTTException as e:
             if e.errno == 5:
                 raise NETPIEException("[MQTT Error 5] Not authorized.\nPlease check your Client ID, token, and secret.".format(e.errno))
+        except OSError as e:
+            if e.errno == -202:
+                if not WLAN().isconnected():
+                    raise NETPIEException("[Error -202] Network Error.\nPlease check your internet or network connection.")
             
     # Publish data to a specified topic
     def publish(self, topic, data):
