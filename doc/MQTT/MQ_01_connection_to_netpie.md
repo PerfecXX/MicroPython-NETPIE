@@ -63,6 +63,7 @@ This can be helpful to avoid excessive use of resources and to introduce a delay
 
 ## Back to NETPIE 
 Go back to your device on the NETPIE, and the device's status should become online.
+![](https://github.com/PerfecXX/MicroPython-NETPIE/blob/main/doc/MQTT/doc_mqtt_01_online_status.jpg)
 
 ## Full code
 ```python
