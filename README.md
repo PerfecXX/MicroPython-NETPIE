@@ -19,5 +19,7 @@ The library encapsulates functionalities to publish messages, manage device shad
 
 ## Example Usage
 - MQTT
+  - [Connect to NETPIE](https://github.com/PerfecXX/MicroPython-NETPIE/blob/main/doc/MQTT/MQ_01_connection_to_netpie.md)
+  - [Publish the data to NETPIE with Shadow Topic]()
 - REST API
 
