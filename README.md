@@ -5,7 +5,7 @@
 
 ## Description
 
-This Python library provides a convenient way to interact with the NETPIE IoT platform using both MQTT and HTTP requests. NETPIE is an Internet of Things (IoT) platform that offers tools and services for connecting and managing IoT devices.
+This Python library provides a convenient way to interact with the NETPIE IoT platform using both MQTT and REST API. NETPIE is an Internet of Things (IoT) platform that offers tools and services for connecting and managing IoT devices.
 
 The library encapsulates functionalities to publish messages, manage device shadows, subscribe to topics, and more. It aims to simplify the process of integrating NETPIE's features into your IoT projects.
 
