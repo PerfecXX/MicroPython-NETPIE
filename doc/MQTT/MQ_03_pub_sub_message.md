@@ -10,7 +10,7 @@ Make sure your devices are in the same group on the NETPIE platform.
 The first device will publish the data to the second device by publishing the message to the same topic that the second device subscribes to.
 If you want to add more devices, please make sure they are in the same group and subscribe to the same topic.
 
-# NETPIE Message Topic
+## NETPIE Message Topic
 On the NETPIE platform, if you want to use the Message topic, any topic must be prefixed with @msg, but using this library, it will be automatically filled.
 In this document, we will use **@msg/data** as the example message topic.
 
