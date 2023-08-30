@@ -115,17 +115,16 @@ netpie_client.set_profile(client_id,token,secret)
 netpie_client.connect()
 print("Netpie Connection Successful")
 
-# ----- Example Data -----
-payload = {"temperature":randint(0,100),
+# -----Main Loop-----
+while True:
+    # ----- Example Data -----
+    payload = {"temperature":randint(0,100),
            "humidity":randint(0,100),
            "movement":{
                "X":randint(0,360),
                "Y":randint(0,360),
                "Z":randint(0,360)
                }}
-
-# -----Main Loop-----
-while True:
     # ---Publish the data to NETPIE's Shadow-----
     netpie_client.publishShadow(payload)
     sleep(1)
