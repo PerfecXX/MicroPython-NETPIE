@@ -25,7 +25,7 @@ The library encapsulates functionalities to publish messages, manage device shad
 - [Connect to NETPIE](https://github.com/PerfecXX/MicroPython-NETPIE/blob/main/doc/MQTT/MQ_01_connection_to_netpie.md)
 - [Publish the data to NETPIE with Shadow Topic](https://github.com/PerfecXX/MicroPython-NETPIE/blob/main/doc/MQTT/MQ_02_pub_data_shadow.md)
 - [Publishing data between the devices with Message Topic](https://github.com/PerfecXX/MicroPython-NETPIE/blob/main/doc/MQTT/MQ_03_pub_sub_message.md)
-- [Control your device with NETPIE's Dashboard.]()
+- [Control your device with NETPIE's Dashboard.](https://github.com/PerfecXX/MicroPython-NETPIE/blob/main/doc/MQTT/MQ_04_netpie_monitoring.md)
 - [Reading the Shadow Data of the Device]()
 
 ## Reference
