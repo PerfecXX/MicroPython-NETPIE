@@ -89,6 +89,7 @@ In the widget setting, the topic needs to **remove the @msg prefix.**
 In this example, your device is subscribed to @msg/data, so in the button widget, the topic is changed to **"data".**
 
 ![](https://github.com/PerfecXX/MicroPython-NETPIE/blob/main/doc/MQTT/doc_mqtt_05_widget_button_setting.jpg)
+![](https://github.com/PerfecXX/MicroPython-NETPIE/blob/main/doc/MQTT/doc_mqtt_05_widget_button.jpg)
 
 When you click the button, NETPIE will publish the message to the topic (in this example, "data" after removing the @msg prefix).
 If your device subscribes to the same topic (@msg/data), then it will receive the message data.
