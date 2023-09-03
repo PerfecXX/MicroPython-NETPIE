@@ -210,6 +210,24 @@ while True:
     netpie_client.check_message()
 ```
 
+## `is_connected()`
+
+Check if the device client is connected to NETPIE.
+
+Use this method only when connecting a device to NETPIE with MQTT.
+
+### Returns
+- `True` : if connected
+- `False` : if not connected
+
+### Example
+```python
+netpie_client = NETPIE()
+status = netpie_client.is_connected()
+print("Netpie Status: ",status)
+```
+
+
 ## `disconnect()`
 
 Disconnect from the NETPIE.
