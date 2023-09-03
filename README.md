@@ -25,6 +25,7 @@ You can see all the API documentation [here](https://github.com/PerfecXX/MicroPy
 - [Publish the data to NETPIE with Shadow Topic](https://github.com/PerfecXX/MicroPython-NETPIE/blob/main/doc/MQTT/MQ_02_pub_data_shadow.md)
 - [Publishing data between the devices with Message Topic](https://github.com/PerfecXX/MicroPython-NETPIE/blob/main/doc/MQTT/MQ_03_pub_sub_message.md)
 - [Control your device with NETPIE's Dashboard.](https://github.com/PerfecXX/MicroPython-NETPIE/blob/main/doc/MQTT/MQ_04_netpie_monitoring.md)
+- [Get your Shadow data from your device with REST API](https://github.com/PerfecXX/MicroPython-NETPIE/blob/main/example/REST/01-get_shadow.py)
 
 ## Reference
 https://docs.netpie.io/en/index.html
