@@ -3,6 +3,7 @@
 Welcome to MicroPython NETPIE API Documentaion, This document will provide how to use each method inside the NETPIE Class.
 
 ## `Import Class`
+
 Before using NETPIE Class, you need to import the library first.
 
 ```python
@@ -59,14 +60,17 @@ Use this method only when connecting a device to NETPIE with MQTT.
 - You device need to access the internet before connecting to NETPIE
 
 ### Parameters
+
 - `clean_session` (bool, optional): Whether to start with a clean session. Defaults to True.
 
 ### Raises
+
 - **NETPIEException**: If authentication details are missing or the connection fails.
 - **NETPIEException([MQTT Error 5])**: If MQTT authentication fails, it might be because of a missing or invalid credential.
 - **NETPIEException([Error -202])**: If there's a network error or no access to the internet.
 
 ### Example
+
 ```python
 netpie_client = NETPIE()
 netpie_client.set_profile("your_client_id", "your_token", "your_secret")
@@ -82,12 +86,15 @@ The published data will be stored in NETPIE's Shadow.
 Use this method only when connecting a device to NETPIE with MQTT and only after successful connection.
 
 ### Parameters
+
 - `unformat_data` (dict): The data to be published.
 
 ### Raises
+
 - **NETPIEException:** If the data is not dict or JSON.
 
 ### Example
+
 ```python
 example_data = {"data1":"test","data2":1723}
 
@@ -104,13 +111,16 @@ Publish a single string message to a specific NETPIE message topic.
 Use this method only when connecting a device to NETPIE with MQTT and only after successful connection.
 
 ### Parameters
+
 - `topic` (str): The topic to publish the message to. The topic will be prefixed with @msg/.
 - `unformat_message` (str): The message to be published.
 
 ### Raises
+
 - **NETPIEException:** If topic or message format is invalid.
 
 ### Example
+
 ```python
 example_msg = "Hello"
 
@@ -127,12 +137,15 @@ Set a callback function for incoming messages.
 Use this method only when connecting a device to NETPIE with MQTT and only before using `connect()`.
 
 ### Parameters
+
 - `callback` (function): Set a callback function for incoming messages.
 
 ### Raises
+
 - **NETPIEException:** If the provided callback is not callable.
 
 ### Example
+
 ```python
 def on_message(topic,msg):
     topic,msg = topic.decode('utf8'),msg.decode('utf8')
@@ -158,13 +171,16 @@ The topic must be prefixed with the following to get the data in the NETPIE topi
 Use this method only when connecting a device to NETPIE with MQTT and only before using `connect()`.
 
 ### Parameters
+
 -  `topic` (str): The topic to subscribe to.
 -  `qos` (int, optional): Quality of Service level. Defaults to 0.
 
 ### Raises
+
 - `NETPIEException:` If the topic format is invalid.
 
 ### Example
+
 ```python
 def on_message(topic,msg):
     topic,msg = topic.decode('utf8'),msg.decode('utf8')
@@ -194,6 +210,7 @@ Use this method inside your main loop to continue checking the message.
 If you don't call this method, the device will not receive any messages from NETPIE.
 
 ### Example
+
 ```python
 def on_message(topic,msg):
     topic,msg = topic.decode('utf8'),msg.decode('utf8')
@@ -217,10 +234,11 @@ Check if the device client is connected to NETPIE.
 Use this method only when connecting a device to NETPIE with MQTT.
 
 ### Returns
-- `True` : if connected
-- `False` : if not connected
+
+- `bool` : True if connected, False otherwise.
 
 ### Example
+
 ```python
 netpie_client = NETPIE()
 status = netpie_client.is_connected()
@@ -235,6 +253,7 @@ Disconnect from the NETPIE.
 Use this method when connecting NETPIE with MQTT.
 
 ### Example
+
 ```python
 netpie_client = NETPIE()
 netpie_client.set_profile("your_client_id", "your_token", "your_secret")
@@ -242,4 +261,322 @@ netpie_client.connect()
 netpie_client.disconnect()
 ```
 
+## `get_device_status(client_id=None, token=None)`
 
+Get the specific device status using the NETPIE REST API.
+
+## Parameters
+
+- `client_id` (str, optional): The Client ID for authentication. Defaults to None.
+- `token` (str, optional): The authentication token. Defaults to None.
+
+If you already use `set_profile()`, then there is no need to pass `client_id` and `token` to this method.
+
+But if you want to get the data of the different devices, then you need to specify the `client_id` and `token`.
+
+### Returns
+
+- `tuple`: A tuple containing the HTTP response code and device status data.
+
+### Raises
+
+- **NETPIEException:** If client_id or token is not a string or if there's an error with the API request.
+
+### Example 1: without using set_profile()
+
+```python
+
+client_id = "your_client_id"
+token = "your_token"
+
+netpie_client = NETPIE()
+response_code,data = netpie_client.get_device_status(client_id,token)
+print("Response Code:",response_code)
+print(data)
+
+```
+
+### Example 2: using set_profile()
+
+```python
+
+netpie_client = NETPIE()
+netpie_client.set_profile("your_client_id","your_token")
+response_code,data = netpie_client.get_device_status()
+print("Response Code:",response_code)
+print(data)
+
+```
+
+## `get_device_shadow(client_id=None, token=None)`
+
+Get the Shadow data from a specific device using NETPIE's REST API.
+
+## Parameters
+
+- `client_id` (str, optional): The Client ID for authentication. Defaults to None.
+- `token` (str, optional): The authentication token. Defaults to None.
+
+If you already use `set_profile()`, then there is no need to pass `client_id` and `token` to this method.
+
+But if you want to get the data of the different devices, then you need to specify the `client_id` and `token`.
+
+### Returns
+
+- `tuple`: A tuple containing the HTTP response code and Shadow data.
+
+### Raises
+
+- **NETPIEException:** If client_id or token is not a string or if there's an error with the API request.
+
+### Example 1: without using set_profile()
+
+```python
+
+client_id = "your_client_id"
+token = "your_token"
+
+netpie_client = NETPIE()
+response_code,data = netpie_client.get_device_shadow(client_id,token)
+print("Response Code:",response_code)
+print(data)
+
+```
+
+### Example 2: using set_profile()
+
+```python
+
+netpie_client = NETPIE()
+netpie_client.set_profile("your_client_id","your_token")
+response_code,data = netpie_client.get_device_shadow()
+print("Response Code:",response_code)
+print(data)
+
+```
+
+## `write_device_shadow(self, data, client_id=None, token=None)`
+
+Write the provided data to the device Shadow using the NETPIE REST API.
+
+## Parameters
+
+- `data` (dict): The data to be written to the device shadow. Should be in the format:
+                         {
+                             "field name 1": value1,
+                             "field name 2": value2,
+                             ...,
+                             "field name n": value n
+                         }
+- `client_id` (str, optional): The Client ID for authentication. Defaults to None.
+- `token` (str, optional): The authentication token. Defaults to None.
+
+If you already use `set_profile()`, then there is no need to pass `client_id` and `token` to this method.
+
+But if you want to get the data of the different devices, then you need to specify the `client_id` and `token`.
+
+### Returns
+- `tuple`: A tuple containing the HTTP response text and response code.
+
+### Raises
+- **NETPIEException:** If data is not a dictionary, if client_id or token is not a string, or if there's an error with the API request.
+
+### Example 1: without using set_profile()
+
+```python
+
+client_id = "your_client_id"
+token = "your_token"
+example_data = {"data1":123,"data2":"hello"}
+
+netpie_client = NETPIE()
+response_code,data = netpie_client.write_device_shadow(example_data,client_id,token)
+print("Response Code:",response_code)
+print(data)
+
+```
+
+### Example 2: using set_profile()
+
+```python
+example_data = {"data1":123,"data2":"hello"}
+
+netpie_client = NETPIE()
+netpie_client.set_profile("your_client_id","your_token")
+response_code,data = netpie_client.write_device_shadow(example_data)
+print("Response Code:",response_code)
+print(data)
+
+```
+
+## `merge_device_shadow(self, data, client_id=None, token=None)`
+
+Merge the provided data to the device Shadow using the NETPIE REST API.
+
+## Parameters
+
+- `data` (dict): The data to be written to the device shadow. Should be in the format:
+                         {
+                             "field name 1": value1,
+                             "field name 2": value2,
+                             ...,
+                             "field name n": value n
+                         }
+- `client_id` (str, optional): The Client ID for authentication. Defaults to None.
+- `token` (str, optional): The authentication token. Defaults to None.
+
+If you already use `set_profile()`, then there is no need to pass `client_id` and `token` to this method.
+
+But if you want to get the data of the different devices, then you need to specify the `client_id` and `token`.
+
+### Returns
+
+- `tuple`: A tuple containing the HTTP response text and response code.
+
+### Raises
+
+- **NETPIEException:** If data is not a dictionary, if client_id or token is not a string, or if there's an error with the API request.
+
+### Example 1: without using set_profile()
+
+```python
+
+client_id = "your_client_id"
+token = "your_token"
+example_data = {"data1":123,"data2":"hello"}
+
+netpie_client = NETPIE()
+response_code,data = netpie_client.merge_device_shadow(example_data,client_id,token)
+print("Response Code:",response_code)
+print(data)
+
+```
+
+### Example 2: using set_profile()
+
+```python
+example_data = {"data1":123,"data2":"hello"}
+
+netpie_client = NETPIE()
+netpie_client.set_profile("your_client_id","your_token")
+response_code,data = netpie_client.merge_device_shadow(example_data)
+print("Response Code:",response_code)
+print(data)
+
+```
+
+## `publish_private_message(topic,msg,client_id=None, token=None)`
+
+Publishes a message to NETPIE's Private topic using the NETPIE REST API.
+
+### Parameters
+
+- `topic` (str): The topic to publish the message to.
+- `msg` (str): The message to be published.
+- `client_id` (str, optional): The Client ID for authentication. Defaults to None.
+- `token` (str, optional): The authentication token. Defaults to None.
+
+If you already use `set_profile()`, then there is no need to pass `client_id` and `token` to this method.
+
+But if you want to get the data of the different devices, then you need to specify the `client_id` and `token`.
+
+For the publisher, do not include the @private prefix in your topic; it will be filled in automatically.
+
+For the subscriber,subscribe with @private/your_topic_name to receive the data.
+
+### Returns
+
+- `tuple`: A tuple containing the HTTP response text and response code.
+
+### Raises
+
+- **NETPIEException:** If topic, data, client_id, or token is not a string, or if there's an error with the API request.
+
+### Example 1: without using set_profile()
+
+```python
+
+client_id = "your_client_id"
+token = "your_token"
+topic = "device1/data1"
+message = "Hello"
+
+netpie_client = NETPIE()
+response_code,data = netpie_client.publish_private_message(topic,message,client_id,token)
+print("Response Code:",response_code)
+print(data)
+
+```
+
+### Example 2: using set_profile()
+
+```python
+
+topic = "device1/data1"
+message = "Hello"
+
+netpie_client = NETPIE()
+netpie_client.set_profile("your_client_id","your_token")
+response_code,data = netpie_client.publish_private_message(topic,message)
+print("Response Code:",response_code)
+print(data)
+
+```
+
+## `publish_device_message(topic,msg,client_id=None, token=None)`
+
+Publishes data to NEPIE's Message topic using the NETPIE REST API.
+
+### Parameters
+
+- `topic` (str): The topic to publish the message to.
+- `msg` (str): The message to be published.
+- `client_id` (str, optional): The Client ID for authentication. Defaults to None.
+- `token` (str, optional): The authentication token. Defaults to None.
+
+If you already use `set_profile()`, then there is no need to pass `client_id` and `token` to this method.
+
+But if you want to get the data of the different devices, then you need to specify the `client_id` and `token`.
+
+For the publisher, do not include the @msg prefix in your topic; it will be filled in automatically.
+ 
+For the subscriber,subscribe with @msg/your_topic_name to receive the data.
+
+### Returns
+
+- `tuple`: A tuple containing the HTTP response text and response code.
+
+### Raises
+
+- **NETPIEException:** If topic, data, client_id, or token is not a string, or if there's an error with the API request.
+
+### Example 1: without using set_profile()
+
+```python
+
+client_id = "your_client_id"
+token = "your_token"
+topic = "device1/data1"
+message = "Hello"
+
+netpie_client = NETPIE()
+response_code,data = netpie_client.publish_device_message(topic,message,client_id,token)
+print("Response Code:",response_code)
+print(data)
+
+```
+
+### Example 2: using set_profile()
+
+```python
+
+topic = "device1/data1"
+message = "Hello"
+
+netpie_client = NETPIE()
+netpie_client.set_profile("your_client_id","your_token")
+response_code,data = netpie_client.publish_device_message(topic,message)
+print("Response Code:",response_code)
+print(data)
+
+```
