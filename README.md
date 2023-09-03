@@ -18,10 +18,9 @@ The library encapsulates functionalities to publish messages, manage device shad
 - Publish private and device messages using REST API
 
 ## API Documentation
-- [MQTT]()
-- [REST API]()
+You can see all the API documentation [here](https://github.com/PerfecXX/MicroPython-NETPIE/blob/main/doc/API_Documentation.md#netpie-api-documentation).
 
-## Example Usage
+## Quick Usage
 - [Connect to NETPIE](https://github.com/PerfecXX/MicroPython-NETPIE/blob/main/doc/MQTT/MQ_01_connection_to_netpie.md)
 - [Publish the data to NETPIE with Shadow Topic](https://github.com/PerfecXX/MicroPython-NETPIE/blob/main/doc/MQTT/MQ_02_pub_data_shadow.md)
 - [Publishing data between the devices with Message Topic](https://github.com/PerfecXX/MicroPython-NETPIE/blob/main/doc/MQTT/MQ_03_pub_sub_message.md)
