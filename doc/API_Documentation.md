@@ -122,6 +122,94 @@ netpie_client.publishMessage(example_msg)
 
 ## `set_callback(callback)`
 
+Set a callback function for incoming messages.
+
+Use this method only when connecting a device to NETPIE with MQTT and only before using `connect()`.
+
+### Parameters
+- `callback` (function): Set a callback function for incoming messages.
+
+### Raises
+- **NETPIEException:** If the provided callback is not callable.
+
+### Example
+```python
+def on_message(topic,msg):
+    topic,msg = topic.decode('utf8'),msg.decode('utf8')
+    print('message from ',topic ,msg)
+
+netpie_client = NETPIE()
+netpie_client.set_profile("your_client_id", "your_token", "your_secret")
+netpie_client.set_callback(on_message)
+netpie_client.connect()
+```
+
+## `subscribe(topic, qos=0)`
+
+Subscribe to a topic.
+
+You can subscribe to more than one topic at the same time.
+
+The topic must be prefixed with the following to get the data in the NETPIE topic:
+- @msg/your_topic_name: for a message from NETPIE
+- @private/# : for receive all information on the topic beginning with @private/.
+- @private/shadow/data/get/response : for receive device shadow information, when it is requested.
+
+Use this method only when connecting a device to NETPIE with MQTT and only before using `connect()`.
+
+### Parameters
+-  `topic` (str): The topic to subscribe to.
+-  `qos` (int, optional): Quality of Service level. Defaults to 0.
+
+### Raises
+- `NETPIEException:` If the topic format is invalid.
+
+### Example
+```python
+def on_message(topic,msg):
+    topic,msg = topic.decode('utf8'),msg.decode('utf8')
+    print('message from ',topic ,msg)
+
+topic1 = "@msg/device1/data1"
+topic2 = "@msg/device1/data2"
+topic3 = "@private/#"
+
+netpie_client = NETPIE()
+netpie_client.set_profile("your_client_id", "your_token", "your_secret")
+netpie_client.set_callback(on_message)
+netpie_client.subscribe(topic1)
+netpie_client.subscribe(topic2)
+netpie_client.subscribe(topic3)
+netpie_client.connect()
+```
+
+## `check_message()`
+
+Check for incoming messages.
+
+Use this method only when connecting a device to NETPIE with MQTT and only after setting the callback function, subscribing to Topic, and making a successful connection.
+
+Use this method inside your main loop to continue checking the message.
+
+If you don't call this method, the device will not receive any messages from NETPIE.
+
+### Example
+```python
+def on_message(topic,msg):
+    topic,msg = topic.decode('utf8'),msg.decode('utf8')
+    print('message from ',topic ,msg)
+
+topic1 = "@msg/device1/data1"
+
+netpie_client = NETPIE()
+netpie_client.set_profile("your_client_id", "your_token", "your_secret")
+netpie_client.set_callback(on_message)
+netpie_client.subscribe(topic1)
+
+while True:
+    netpie_client.check_message()
+```
+
 ## `disconnect()`
 
 Disconnect from the NETPIE.
